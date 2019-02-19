@@ -1,6 +1,7 @@
 import React from 'react'
-import {View, StyleSheet, ImageBackground, TouchableOpacity, Text} from 'react-native'
+import {View, StyleSheet, ImageBackground, TouchableOpacity, Text, Dimensions} from 'react-native'
 import { Constants } from 'expo'
+import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 
 export default class SplashScreen extends React.Component{
   constructor(props){
@@ -10,16 +11,16 @@ export default class SplashScreen extends React.Component{
 
   render(){
     return(
-    <View style={styles.backgroundContainer}>
-    <TouchableOpacity onPress={()=>this.props.navigation.navigate('Home')}>
-    <View style={styles.button}>
-    <ImageBackground style={styles.buttonImage} source={require('../assets/Button.png')}>
-    <Text style={styles.buttonText}> Get Started</Text>
-    </ImageBackground>
-    </View>
-    </TouchableOpacity>
-    </View>
-  )
+      <View style={styles.backgroundContainer}>
+        <TouchableOpacity onPress={()=>this.props.navigation.navigate('Home')}>
+          <View>
+            <ImageBackground style={styles.buttonImage} source={require('../assets/Button.png')}>
+              <Text style={styles.buttonText}> Get Started</Text>
+            </ImageBackground>
+          </View>
+        </TouchableOpacity>
+      </View>
+    )
   }
 }
 
@@ -34,14 +35,9 @@ const styles = StyleSheet.create(
           justifyContent: 'flex-end'
 
         },
-        button: {
-          height: 48,
-          width: undefined,
-          justifyContent: 'center'
-
-        },
         buttonImage:{
-          height: 48,
+          width: wp('100%'),
+          height: hp('7.1964%'),
           flexDirection: 'column',
           justifyContent: 'center',
 
@@ -50,6 +46,7 @@ const styles = StyleSheet.create(
           color: '#FFFFFF',
           textAlign: 'center',
           fontSize: 20,
+          fontFamily: 'Helvetica',
           justifyContent: 'space-evenly'
         }
     }
