@@ -1,13 +1,17 @@
 import React from 'react'
 import {View, StyleSheet, ImageBackground, TouchableOpacity, Text, Dimensions} from 'react-native'
 import { Constants } from 'expo'
-import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
+//import {widthPercentageToDP as wp, heightPercentageToDP as hp, listenOrientationChange as loc, removeOrientationListener as rol} from 'react-native-responsive-screen';
+
+
+
+
+
 
 export default class SplashScreen extends React.Component{
   constructor(props){
     super(props)
   }
-
 
   render(){
     return(
@@ -45,9 +49,31 @@ const styles = StyleSheet.create(
         buttonText:{
           color: '#FFFFFF',
           textAlign: 'center',
-          fontSize: 20,
+          fontSize: hp('2.4%'),
           fontFamily: 'Helvetica',
           justifyContent: 'space-evenly'
         }
     }
 )
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
