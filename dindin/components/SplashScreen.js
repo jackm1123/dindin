@@ -4,10 +4,10 @@ https://www.lynda.com/React-Native-tutorials/Creating-animation-loop/560343/6724
 https://facebook.github.io/react-native/docs/animations
 */
 import React from 'react'
-import {Animated, View, StyleSheet, ImageBackground, Image, TouchableOpacity, Text, Dimensions} from 'react-native'
+import {Animated, View, StyleSheet, ImageBackground, Image, TouchableHighlight, Text, Dimensions} from 'react-native'
 import { Constants } from 'expo'
 import {widthPercentageToDP as wp, heightPercentageToDP as hp, listenOrientationChange as loc, removeOrientationListener as rol} from 'react-native-responsive-screen';
-
+import LocalizedStrings from 'react-localization';
 /* Making Fade Animation View */
 class FadeInView extends React.Component {
   state = {
@@ -52,7 +52,19 @@ export default class SplashScreen extends React.Component{
   }
 
 
+
+
   render(){
+
+    let localStrings = new LocalizedStrings({
+      ar:{
+        catchphrase:"توصيل عشاق الطعام"
+      },
+      en:{
+        catchphrase:"Connecting food lovers"
+      },
+    })
+
 
     return(
       <View style={styles.backgroundContainer}>
@@ -76,16 +88,16 @@ export default class SplashScreen extends React.Component{
 
 
         <Text style={styles.title}>DinDin</Text>
-        <Text style={styles.description}>Connecting food lovers</Text>
+        <Text style={styles.description}>{localStrings.catchphrase}</Text>
 
-        <TouchableOpacity onPress={()=>this.props.navigation.navigate('Home')}>
+        <TouchableHighlight underlayColor = {'#0A46FF'} onPress={()=>this.props.navigation.navigate('Home')}>
           <View>
             <ImageBackground style={styles.buttonImage} source={require('../assets/Button.png')}>
               <Text style={styles.buttonText}> Get Started</Text>
             </ImageBackground>
           </View>
-        </TouchableOpacity>
-      
+        </TouchableHighlight>
+
       </View>
     )
   }
@@ -113,7 +125,7 @@ const styles = StyleSheet.create(
           color: '#FFFFFF',
           textAlign: 'center',
           fontSize: hp('2.4%'),
-          fontFamily: 'Helvetica',
+          //fontFamily: 'Helvetica',
           justifyContent: 'space-evenly'
         },
         circles:{
@@ -150,7 +162,7 @@ const styles = StyleSheet.create(
           right: wp('24%'),
         },
         title:{
-          fontFamily: 'Helvetica',
+          //fontFamily: 'Helvetica',
           fontSize: hp('4%'),
           color: '#353535',
           textAlign: 'center',
@@ -160,7 +172,7 @@ const styles = StyleSheet.create(
         },
         description:{
           opacity: 0.5,
-          fontFamily: 'Helvetica',
+        //  fontFamily: 'Helvetica',
           fontSize: hp('2%'),
           color: '#000000',
           textAlign: 'center',
@@ -169,25 +181,3 @@ const styles = StyleSheet.create(
         },
     }
 )
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

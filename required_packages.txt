@@ -1,8 +1,0 @@
-packages installed:
-create-react-app
-expo-cli
-npm
-react-native-cli
-react-navigation
-react-response
-react-native-responsive-screen (npm install react-native-responsive-screen --save)
