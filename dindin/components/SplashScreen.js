@@ -35,7 +35,7 @@ class FadeInView extends React.Component {
 
 /* {this.props.children} is used to display whatever you include between
 the opening and closing tags when invoking a component
-...this.props.style uses ... to expand the array of this.props,style into a list.
+...this.props.style uses ... to pass in several parameters at once
 this.props.style is used for inheriting from classes around it*/
     return (
       <Animated.View style={{...this.props.style, opacity: fadeAnim}}>
