@@ -7,7 +7,7 @@ import React from 'react'
 import {Animated, View, StyleSheet, ImageBackground, Image, TouchableHighlight, Text, Dimensions} from 'react-native'
 import { Constants } from 'expo'
 import {widthPercentageToDP as wp, heightPercentageToDP as hp, listenOrientationChange as loc, removeOrientationListener as rol} from 'react-native-responsive-screen';
-import LocalizedStrings from 'react-localization';
+import { Localization } from 'expo-localization';
 /* Making Fade Animation View */
 class FadeInView extends React.Component {
   state = {
@@ -56,14 +56,11 @@ export default class SplashScreen extends React.Component{
 
   render(){
 
-    let localStrings = new LocalizedStrings({
-      ar:{
-        catchphrase:"توصيل عشاق الطعام"
-      },
-      en:{
-        catchphrase:"Connecting food lovers"
-      },
-    })
+    /* Internationalization */
+    let localString = "Connecting food lovers"
+    if (Localization.locale === "ar-US"){
+      localString = "توصيل عشاق الطعام"
+    }
 
 
     return(
@@ -88,7 +85,7 @@ export default class SplashScreen extends React.Component{
 
 
         <Text style={styles.title}>DinDin</Text>
-        <Text style={styles.description}>{localStrings.catchphrase}</Text>
+        <Text style={styles.description}>{localString}</Text>
 
         <TouchableHighlight underlayColor = {'#0A46FF'} onPress={()=>this.props.navigation.navigate('Home')}>
           <View>
