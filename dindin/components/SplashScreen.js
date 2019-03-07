@@ -6,8 +6,10 @@ https://facebook.github.io/react-native/docs/animations
 import React from 'react'
 import {Animated, View, StyleSheet, ImageBackground, Image, TouchableHighlight, Text, Dimensions} from 'react-native'
 import { Constants } from 'expo'
-import {widthPercentageToDP as wp, heightPercentageToDP as hp, listenOrientationChange as loc, removeOrientationListener as rol} from 'react-native-responsive-screen';
+import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import { Localization } from 'expo-localization';
+
+
 /* Making Fade Animation View */
 class FadeInView extends React.Component {
   state = {
@@ -22,7 +24,7 @@ class FadeInView extends React.Component {
         toValue: opacity,
         duration: 1000,
       }
-    ).start(() => { this.animateFade(1 ^ opacity)}) // XOR 1 with current opacity to alternate 0 and 1
+    ).start(() => { this.animateFade(1 ^ opacity) }) // XOR 1 with current opacity to alternate 0 and 1
   }
 
   async componentDidMount(){
@@ -51,9 +53,6 @@ export default class SplashScreen extends React.Component{
     super(props)
   }
 
-
-
-
   render(){
 
     /* Internationalization */
@@ -63,40 +62,40 @@ export default class SplashScreen extends React.Component{
     }
 
 
-    return(
-      <View style={styles.backgroundContainer}>
-        <Image style={styles.circles} source={require('../assets/ovals2.png')}>
-        </Image>
-        <Image style={styles.home} source={require('../assets/house2.png')}>
-        </Image>
-
-        <FadeInView style={styles.pinkface}>
-          <Image source={require('../assets/pinkface2.png')}>
+      return(
+        <View style={styles.backgroundContainer}>
+          <Image style={styles.circles} source={require('../assets/ovals2.png')}>
           </Image>
-        </FadeInView>
-        <FadeInView style={styles.purpleface}>
-          <Image source={require('../assets/purpleface.png')}>
+          <Image style={styles.home} source={require('../assets/house2.png')}>
           </Image>
-        </FadeInView>
-        <FadeInView style={styles.greenface}>
-          <Image source={require('../assets/greenface.png')}>
-          </Image>
-        </FadeInView>
+
+          <FadeInView style={styles.pinkface}>
+            <Image source={require('../assets/pinkface2.png')}>
+            </Image>
+          </FadeInView>
+          <FadeInView style={styles.purpleface}>
+            <Image source={require('../assets/purpleface.png')}>
+            </Image>
+          </FadeInView>
+          <FadeInView style={styles.greenface}>
+            <Image source={require('../assets/greenface.png')}>
+            </Image>
+          </FadeInView>
 
 
-        <Text style={styles.title}>DinDin</Text>
-        <Text style={styles.description}>{localString}</Text>
+          <Text style={styles.title}>DinDin</Text>
+          <Text style={styles.description}>{localString}</Text>
 
-        <TouchableHighlight underlayColor = {'#0A46FF'} onPress={()=>this.props.navigation.navigate('Home')}>
-          <View>
-            <ImageBackground style={styles.buttonImage} source={require('../assets/Button.png')}>
-              <Text style={styles.buttonText}> Get Started</Text>
-            </ImageBackground>
-          </View>
-        </TouchableHighlight>
+          <TouchableHighlight underlayColor = {'#0A46FF'} onPress={()=>this.props.navigation.navigate('Home')}>
+            <View>
+              <ImageBackground style={styles.buttonImage} source={require('../assets/Button.png')}>
+                <Text style={styles.buttonText}> Get Started</Text>
+              </ImageBackground>
+            </View>
+          </TouchableHighlight>
 
-      </View>
-    )
+        </View>
+      )
   }
 }
 
@@ -178,3 +177,6 @@ const styles = StyleSheet.create(
         },
     }
 )
+
+
+
