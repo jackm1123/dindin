@@ -1,8 +1,8 @@
 import React from 'react';
-import { StyleSheet, Text, View, Button, Image} from 'react-native';
+import { Animated, StyleSheet, Text, View, Button, Image, ScrollView} from 'react-native';
 import {HeaderBackButton} from 'react-navigation'
 
-
+/*Customize Back button in header*/
 class MyCustomHeaderBackImage extends React.Component {
   render() {
     const source = require('../assets/sidemenu.png');
@@ -16,7 +16,6 @@ class MyCustomHeaderBackImage extends React.Component {
 }
 
 export default class HomeScreen extends React.Component {
-
     
   static navigationOptions = ({ navigation }) => ({
     title: 'Profile',
@@ -33,7 +32,9 @@ export default class HomeScreen extends React.Component {
         style={styles2.myCustomHeaderBackImage}
       /> 
     ),
-    
+  });
+
+
     /*
     headerRight: (
       <Button
@@ -44,12 +45,6 @@ export default class HomeScreen extends React.Component {
     ),
     
     */
-
-
-
-  });
-
-
 
 
 
@@ -65,7 +60,21 @@ export default class HomeScreen extends React.Component {
 
     return (
       <View style={styles.container}>
-        <Text>Homescreen</Text>
+        <ScrollView
+          horizontal
+          showsHorizontalScrollIndicator={true}
+          scrollEventThrottle={10}
+          pagingEnabled
+          onScroll={
+            Animated.event(
+              [{ nativeEvent: { contentOffset: { x: this.animVal } } }]
+            )
+          }
+        >
+
+          
+
+        </ScrollView>
       </View>
     );
   }
