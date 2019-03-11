@@ -32,9 +32,7 @@ export default class HomeScreen extends React.Component {
         style={styles2.myCustomHeaderBackImage}
       /> 
     ),
-  });
-
-
+  })
     /*
     headerRight: (
       <Button
