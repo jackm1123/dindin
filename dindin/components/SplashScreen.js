@@ -4,10 +4,11 @@ https://www.lynda.com/React-Native-tutorials/Creating-animation-loop/560343/6724
 https://facebook.github.io/react-native/docs/animations
 */
 import React from 'react'
-import {Animated, View, StyleSheet, ImageBackground, Image, TouchableHighlight, Text, Dimensions} from 'react-native'
-import { Constants } from 'expo'
+import {Animated, View, StyleSheet, ImageBackground, Image, TouchableHighlight, Text, Dimensions, Button, Alert} from 'react-native'
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import { Localization } from 'expo-localization';
+import { StackNavigator } from 'react-navigation';
+import { Constants, Facebook } from 'expo';
 
 
 /* Making Fade Animation View */
@@ -53,6 +54,63 @@ export default class SplashScreen extends React.Component{
     super(props)
   }
 
+  /* Facebook login */
+  async handleFacebookLogin(navigation) {
+    try {
+      const { type, token } = await Facebook.logInWithReadPermissionsAsync(
+        '1201211719949057', // Replace with your own app id in standalone app
+        { permissions: ['public_profile'] }
+      );
+      console.log(type + " "+ token)
+
+      switch (type) {
+        case 'success': {
+          // Get the user's name using Facebook's Graph API
+          const response = await fetch(
+            `https://graph.facebook.com/me?access_token=${token}`
+          );
+          const profile = await response.json();
+          console.log("Was Successful")
+          navigation.navigate('Home');
+
+          break;
+        }
+        case 'cancel': {
+          Alert.alert('Whoops!', 'You need a facebook to access DinDin:)');
+
+          break;
+        }
+        default: {
+          Alert.alert('Oops!', 'Login failed!');
+        }
+      }
+    } catch (e) {
+      console.log('Something unexpected happened');
+    }
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   render(){
 
     /* Internationalization */
@@ -86,7 +144,7 @@ export default class SplashScreen extends React.Component{
           <Text style={styles.title}>DinDin</Text>
           <Text style={styles.description}>{localString}</Text>
 
-          <TouchableHighlight underlayColor = {'#0A46FF'} onPress={()=>this.props.navigation.navigate('Home')}>
+          <TouchableHighlight underlayColor = {'#0A46FF'} onPress={() => this.handleFacebookLogin(this.props.navigation)}>
             <View>
               <ImageBackground style={styles.buttonImage} source={require('../assets/Button.png')}>
                 <Text style={styles.buttonText}> Get Started</Text>
