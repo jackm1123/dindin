@@ -18,7 +18,7 @@ class MyCustomHeaderBackImage extends React.Component {
 export default class HomeScreen extends React.Component {
     
   static navigationOptions = ({ navigation }) => ({
-    title: 'Profile',
+    title: 'DinDin',
     headerBackImage: (
       <MyCustomHeaderBackImage />
     ),
