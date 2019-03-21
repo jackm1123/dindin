@@ -3,6 +3,17 @@ import { StyleSheet, Text, View } from 'react-native';
 import HomeScreen from './components/HomeScreen'
 import SplashScreen from './components/SplashScreen'
 import {createAppContainer,createStackNavigator} from 'react-navigation'
+import * as firebase from 'firebase';
+
+//Initialize Firebase
+var config = {
+    databaseURL: "https://dindind-ffbf6.firebaseio.com/",
+    projectId: "dindind-ffbf6>",
+};
+if (!firebase.apps.length) {
+    firebase.initializeApp(config);
+}
+
 
 const rootStack = createStackNavigator({
   Home: {

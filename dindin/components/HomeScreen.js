@@ -1,6 +1,20 @@
 import React from 'react';
-import { Animated, StyleSheet, Text, View, Button, Image, ScrollView} from 'react-native';
+import { Animated, StyleSheet, Text, View, Button, Image, ScrollView, ListView} from 'react-native';
 import {HeaderBackButton} from 'react-navigation'
+import InviteCard from './InviteCard';
+import * as firebase from 'firebase';
+
+//Initialize Firebase
+var config = {
+    databaseURL: "https://dindind-ffbf6.firebaseio.com/",
+    projectId: "dindind-ffbf6>",
+};
+if (!firebase.apps.length) {
+    firebase.initializeApp(config);
+}
+
+
+
 
 /*Customize Back button in header*/
 class MyCustomHeaderBackImage extends React.Component {
@@ -45,34 +59,32 @@ export default class HomeScreen extends React.Component {
     */
 
 
-
-
-
-
-
   constructor(props){
     super(props)
   }
 
+
+  writeUserData(id,name){
+      firebase.database().ref('Users/').push({
+          id,
+          name
+      }).then((data)=>{
+          //success callback
+          console.log('data ' , data)
+      }).catch((error)=>{
+          //error callback
+          console.log('error ' , error)
+      })
+  }
+
+
   render() {
 
+    this.writeUserData(this.props.navigation.state.params.profile.id, this.props.navigation.state.params.profile.name)
     return (
       <View style={styles.container}>
-        <ScrollView
-          horizontal
-          showsHorizontalScrollIndicator={true}
-          scrollEventThrottle={10}
-          pagingEnabled
-          onScroll={
-            Animated.event(
-              [{ nativeEvent: { contentOffset: { x: this.animVal } } }]
-            )
-          }
-        >
-
-          
-
-        </ScrollView>
+        <Text>{this.props.navigation.state.params.profile.name}</Text>
+        <InviteCard/>
       </View>
     );
   }
@@ -85,10 +97,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-
-
-
-
 });
 
 const styles2 = StyleSheet.create({

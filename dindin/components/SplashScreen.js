@@ -71,7 +71,15 @@ export default class SplashScreen extends React.Component{
           );
           const profile = await response.json();
           console.log("Was Successful")
-          navigation.navigate('Home');
+          console.log(profile)
+          navigation.navigate('Home', {profile});
+
+          /*Passes profile JSON object like this:
+          Object {
+              "id": "1135895363248795",
+              "name": "Jack McManus",
+              }
+          */
 
           break;
         }
