@@ -1,13 +1,44 @@
 import * as React from 'react'
 import {View, Text, StyleSheet, Image, TouchableOpacity, ImageBackground, Button} from 'react-native'
+import * as firebase from 'firebase';
 
+//Initialize Firebase
+var config = {
+    databaseURL: "https://dindind-ffbf6.firebaseio.com/",
+    projectId: "dindind-ffbf6>",
+};
+if (!firebase.apps.length) {
+    firebase.initializeApp(config);
+}
 
-export default class SplashScreen extends React.Component{
+export default class InviteCard extends React.Component{
 	constructor(props){
 		super(props)
+        this.readUserData(this.props.navigation.state.params.profile.id)
+        this.state = {snapshot: ""}
+
 	}
+
+
+    ComponentDidMount(){
+    }
+
+
+     readUserData(path) {
+        currentContext = this 
+        firebase.database().ref('Users/' + path).once('value', function (snapshot) {
+            currentContext.setState({
+                snapshot: JSON.stringify(snapshot.val())
+            })
+            console.log(this.state)
+        });
+
+    }
+
 	render(){
+
         return(
+
             <View style={styles.container}>
 
                 <View style={{flexDirection: 'row', flex: 'end',}}>
@@ -17,7 +48,7 @@ export default class SplashScreen extends React.Component{
                     </View>
 
                     <View style={{flexDirection: 'column'}}>
-                        <Text style={{fontSize: 16, color: 'black'}}>Alma Evans</Text>
+                        <Text style={{fontSize: 16, color: 'black'}}>{this.state.snapshot}</Text>
                         <Text style={{fontSize: 15, color: 'gray'}}>Sunday 17 June - 8:00pm</Text>
                     </View>
                 </View>

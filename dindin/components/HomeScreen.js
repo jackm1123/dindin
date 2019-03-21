@@ -66,7 +66,7 @@ export default class HomeScreen extends React.Component {
   writeUserData(name){
       id = this.props.navigation.state.params.profile.id
 
-      firebase.database().ref('Users/' + id).set({
+      firebase.database().ref('Users/' + id).update({
           name
       }).then((data)=>{
           //success callback
@@ -84,7 +84,7 @@ export default class HomeScreen extends React.Component {
     return (
       <View style={styles.container}>
         <Text>{this.props.navigation.state.params.profile.name}</Text>
-        <InviteCard/>
+        <InviteCard {...this.props}/>
       </View>
     );
   }
