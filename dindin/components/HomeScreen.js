@@ -63,10 +63,10 @@ export default class HomeScreen extends React.Component {
     super(props)
   }
 
+  writeUserData(name){
+      id = this.props.navigation.state.params.profile.id
 
-  writeUserData(id,name){
-      firebase.database().ref('Users/').push({
-          id,
+      firebase.database().ref('Users/' + id).set({
           name
       }).then((data)=>{
           //success callback
@@ -80,7 +80,7 @@ export default class HomeScreen extends React.Component {
 
   render() {
 
-    this.writeUserData(this.props.navigation.state.params.profile.id, this.props.navigation.state.params.profile.name)
+    this.writeUserData(this.props.navigation.state.params.profile.name)
     return (
       <View style={styles.container}>
         <Text>{this.props.navigation.state.params.profile.name}</Text>

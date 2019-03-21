@@ -22,6 +22,27 @@ export default class SplashScreen extends React.Component{
                     </View>
                 </View>
                 
+
+                <View style={{flexDirection: 'row', flex: 'end', justifyContent: 'space-evenly',}}>
+                    <View>
+                        <TouchableOpacity>
+                            <View style={{flexDirection: 'row'}}> 
+                                <Image style={{width: 20, height: 20,}} source={require('../assets/ex.png')}></Image>
+                                <Text style={{color: 'red'}}> Decline </Text>
+                            </View>
+
+                        </TouchableOpacity>
+                    </View>
+
+                    <View>
+                        <TouchableOpacity>
+                            <View style={{flexDirection: 'row'}}> 
+                                <Image style={{width: 20, height: 20,}} source={require('../assets/check.png')}></Image>
+                                <Text style={{color: '#00cc00'}}> Accept </Text>
+                            </View>
+                        </TouchableOpacity>
+                    </View>
+                </View>
             </View>
             
         )
@@ -29,30 +50,12 @@ export default class SplashScreen extends React.Component{
 
 }
 
-/*
-
-                <View style={{flexDirection: 'row'}}>
-                    <TouchableOpacity>
-                        <View>
-                            <ImageBackground style={{width: 40}} source={require('../assets/ex.png')}> </ImageBackground>
-                        </View>
-                    </TouchableOpacity>
-                    <TouchableOpacity>
-                        <View>
-                        <ImageBackground style={{width: 40}} source={require('../assets/check.png')}> </ImageBackground>
-                        </View>
-                    </TouchableOpacity>
-                </View>
-
-
-*/
-
 const styles = StyleSheet.create(
     {
         container:{
             height: 150,
             width: 300,
-            backgroundColor: '#228B22',
+            backgroundColor: '#F8F8F8',
 		    borderColor: 'transparent',
 		    borderWidth: 1,
 		    paddingLeft: 16,
