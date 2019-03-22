@@ -1,7 +1,7 @@
 import React from 'react';
 import { Animated, StyleSheet, Text, View, Button, Image, ScrollView, ListView} from 'react-native';
 import {HeaderBackButton} from 'react-navigation'
-import InviteCard from './InviteCard';
+import PendingScrollView from './PendingScrollView';
 import * as firebase from 'firebase';
 
 //Initialize Firebase
@@ -67,12 +67,12 @@ export default class HomeScreen extends React.Component {
 
   readUserData(path) {
       currentContext = this 
-      firebase.database().ref('Users/' + path).once('value', function (snapshot) {
+      firebase.database().ref('Users/' + path).on('value', function (snapshot) {
           currentContext.setState({
               snapshot: snapshot.val()
           })
-          console.log("state in readuserdata / HomeScreen")
-          console.log(currentContext.state)
+          //console.log("state in readuserdata / HomeScreen")
+          //console.log(currentContext.state)
       });
 
   }
@@ -97,8 +97,7 @@ export default class HomeScreen extends React.Component {
     this.writeUserData(this.props.navigation.state.params.profile.name)
     return (
       <View style={styles.container}>
-        <Text>{this.props.navigation.state.params.profile.name}</Text>
-        <InviteCard data={this.state.snapshot}/>
+        <PendingScrollView data={this.state.snapshot}/>
       </View>
     );
   }

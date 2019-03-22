@@ -22,11 +22,11 @@ export default class InviteCard extends React.Component{
 
     componentWillReceiveProps(nextProps) {
         this.setState({ data: nextProps.data }); 
-        this.setState({ host: nextProps.data.invitations.invite.host})
-        this.setState({ time: nextProps.data.invitations.invite.time})
-        this.setState({ date: nextProps.data.invitations.invite.date})
-        console.log("state inside will receive props")
-        console.log(this.state) 
+        this.setState({ host: nextProps.data.host})
+        this.setState({ time: nextProps.data.time})
+        this.setState({ date: nextProps.data.date})
+        //console.log("state inside will receive props")
+        //console.log(this.state) 
     }
 
 
