@@ -14,26 +14,21 @@ if (!firebase.apps.length) {
 export default class InviteCard extends React.Component{
 	constructor(props){
 		super(props)
-        this.readUserData(this.props.navigation.state.params.profile.id)
-        this.state = {snapshot: ""}
+        this.state = {
+            data: props.data
+        }
 
 	}
 
-
-    ComponentDidMount(){
+    componentWillReceiveProps(nextProps) {
+        this.setState({ data: nextProps.data }); 
+        this.setState({ host: nextProps.data.invitations.invite.host})
+        this.setState({ time: nextProps.data.invitations.invite.time})
+        this.setState({ date: nextProps.data.invitations.invite.date})
+        console.log("state inside will receive props")
+        console.log(this.state) 
     }
 
-
-     readUserData(path) {
-        currentContext = this 
-        firebase.database().ref('Users/' + path).once('value', function (snapshot) {
-            currentContext.setState({
-                snapshot: JSON.stringify(snapshot.val())
-            })
-            console.log(this.state)
-        });
-
-    }
 
 	render(){
 
@@ -48,8 +43,8 @@ export default class InviteCard extends React.Component{
                     </View>
 
                     <View style={{flexDirection: 'column'}}>
-                        <Text style={{fontSize: 16, color: 'black'}}>{this.state.snapshot}</Text>
-                        <Text style={{fontSize: 15, color: 'gray'}}>Sunday 17 June - 8:00pm</Text>
+                        <Text style={{fontSize: 16, color: 'black'}}>{this.state.host}</Text>
+                        <Text style={{fontSize: 15, color: 'gray'}}>{this.state.date} - {this.state.time}</Text>
                     </View>
                 </View>
                 

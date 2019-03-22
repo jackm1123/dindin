@@ -61,6 +61,20 @@ export default class HomeScreen extends React.Component {
 
   constructor(props){
     super(props)
+    this.readUserData(this.props.navigation.state.params.profile.id)
+    this.state = {snapshot: ""}
+  }
+
+  readUserData(path) {
+      currentContext = this 
+      firebase.database().ref('Users/' + path).once('value', function (snapshot) {
+          currentContext.setState({
+              snapshot: snapshot.val()
+          })
+          console.log("state in readuserdata / HomeScreen")
+          console.log(currentContext.state)
+      });
+
   }
 
   writeUserData(name){
@@ -84,7 +98,7 @@ export default class HomeScreen extends React.Component {
     return (
       <View style={styles.container}>
         <Text>{this.props.navigation.state.params.profile.name}</Text>
-        <InviteCard {...this.props}/>
+        <InviteCard data={this.state.snapshot}/>
       </View>
     );
   }
