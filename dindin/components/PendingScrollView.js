@@ -40,7 +40,7 @@ export default class EventScrollView extends React.Component{
 
 
     	keyExtractor(item){
-        	return item.date + item.host + item.time
+        	return Math.random()
     	}
 
     	renderRow({item}){
@@ -53,9 +53,12 @@ export default class EventScrollView extends React.Component{
     	}
 
         render(){
+            console.log("logging pendingview")
+            console.log(JSON.stringify(this.state.invitations))
             if(this.state.invitations !== null){
             return(
                 <View style={styles.container}>
+                    <Text style={{alignItems: 'center'}}> Pending ({this.state.invitations.length}) </Text>
                      <FlatList
                         horizontal
                         data={this.state.invitations}
@@ -79,6 +82,7 @@ const styles = StyleSheet.create(
             flexWrap: 'wrap',
             flexDirection:'column',
             justifyContent: 'space-between',
+            alignItems: 'center',
         },
 
         rowContainer:{

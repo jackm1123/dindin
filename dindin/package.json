@@ -17,6 +17,8 @@
     "react-native-locale-detector": "^1.0.1",
     "react-native-localization": "^2.1.0",
     "react-native-responsive-screen": "^1.2.0",
+    "react-native-snap-carousel": "^3.7.5",
+    "react-native-tab-view": "^2.0.3",
     "react-navigation": "^3.3.0"
   },
   "devDependencies": {
