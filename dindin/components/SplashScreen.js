@@ -61,7 +61,7 @@ export default class SplashScreen extends React.Component{
         '1201211719949057', // Replace with your own app id in standalone app
         { permissions: ['public_profile'] }
       );
-      console.log(type + " "+ token)
+      //console.log(type + " "+ token)
 
       switch (type) {
         case 'success': {
@@ -70,8 +70,8 @@ export default class SplashScreen extends React.Component{
             `https://graph.facebook.com/me?access_token=${token}`
           );
           const profile = await response.json();
-          console.log("Was Successful")
-          console.log(profile)
+          //console.log("Was Successful")
+          //console.log(profile)
           navigation.navigate('Home', {profile});
 
           /*Passes profile JSON object like this:

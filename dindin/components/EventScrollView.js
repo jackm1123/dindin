@@ -5,20 +5,30 @@ export default class EventScrollView extends React.Component{
 
     constructor(props){
         super(props)
-        console.log("da props")
-        console.log(props)
         if (props.data === null || props.data === undefined){
             this.state={
-                eventList: []
+                eventList: [],
+                flex: 1,
             }
         }
         else{
-            console.log("okay, setting them to state now")
-            console.log(props)
-            this.state ={
-                eventList: Object.values(props.data)
+            //console.log("okay, setting them to state now")
+            //console.log(props)
+            if (props.pending.invitations === undefined){
+                this.state={
+                    flex: 0,
+                    eventList: Object.values(props.data),
+                }
+            }
+            else{
+                this.state={
+                    flex:1,
+                    eventList: Object.values(props.data),
+                }
             }
         }
+
+        
         //console.log("constructor invitations data")
         //console.log(this.state.invitations)
     }
@@ -66,9 +76,12 @@ export default class EventScrollView extends React.Component{
     }
 
     render(){
+
+
+
         if(this.state.eventList !== null){
         return(
-            <View style={styles.container}>
+            <View style={[styles.container, {flex: this.state.flex}]}>
                  <FlatList
                     data={this.state.eventList}
                     renderItem={this.renderRow}
@@ -87,11 +100,8 @@ export default class EventScrollView extends React.Component{
 const styles = StyleSheet.create(
     {
         container:{
-            flex:1,
-            flexWrap: 'wrap',
-            flexDirection:'column',
-            justifyContent: 'space-between',
-            padding:20
+            flex: 0,
+            padding: 20,
         },
 
         rowContainer:{

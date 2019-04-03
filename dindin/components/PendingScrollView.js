@@ -17,45 +17,66 @@ export default class EventScrollView extends React.Component{
         	super(props)
             if (props.data.invitations === null || props.data.invitations === undefined){
                 this.state={
-                    invitations: []
+                    invitations: [],
+                    userid: props.userid,
                 }
             }
             else{
+                invts = Object.values(props.data.invitations)
+                invtids = Object.keys(props.data.invitations)
+                for (i = 0; i < invts.length; i++){
+                    invts[i].id = invtids[i]
+                }
             	this.state ={
-               		invitations: Object.values(props.data.invitations)
+               		invitations: invts,
+                    userid: props.userid,
             	}
-            }
-            //console.log("constructor invitations data")
-            //console.log(this.state.invitations)
+            }  
     	}
 
     	componentWillReceiveProps(nextProps) {
             if (nextProps.data.invitations === null || nextProps.data.invitations === undefined){
-                this.setState({ invitations: []})
+                this.setState({ invitations: [],
+                                userid: props.userid, })
             }
             else{
-                this.setState({ invitations: Object.values(nextProps.data.invitations) })
+                invts = Object.values(nextProps.data.invitations)
+                invtids = Object.keys(nextProps.data.invitations)
+                for (i = 0; i < invts.length; i++){
+                    invts[i].id = invtids[i]
+                }
+                this.setState({ invitations: invts,
+                                userid: props.userid, })
             }
     	}
 
-
+        //keys always have to be string
     	keyExtractor(item){
-        	return Math.random()
+        	return item.host.toString() + item.date.toString() + item.time.toString()
     	}
+
 
     	renderRow({item}){
-
 	        return(
             <View style={styles.rowContainer}>
-                <InviteCard data={item}/>
+                <InviteCard data={item} userid={currContext.state.userid}/>
             </View>
-        )
+            )
     	}
 
+        _listEmptyComponent(){
+            return (
+                <View>
+                </View>
+            )
+        }
+
+
+
+
         render(){
-            console.log("logging pendingview")
-            console.log(JSON.stringify(this.state.invitations))
             if(this.state.invitations !== null){
+            currContext = this
             return(
                 <View style={styles.container}>
                     <Text style={{alignItems: 'center'}}> Pending ({this.state.invitations.length}) </Text>
@@ -64,6 +85,7 @@ export default class EventScrollView extends React.Component{
                         data={this.state.invitations}
                         renderItem={this.renderRow}
                         keyExtractor={this.keyExtractor}
+                        ListEmptyComponent={this._listEmptyComponent}
                     />
                 </View>
             )
@@ -79,9 +101,9 @@ const styles = StyleSheet.create(
     {
         container:{
             flex:1,
-            flexWrap: 'wrap',
+            flexWrap: 'nowrap',
             flexDirection:'column',
-            justifyContent: 'space-between',
+            height: 40,
             alignItems: 'center',
         },
 

@@ -20,8 +20,6 @@ export default class InviteCard extends React.Component{
             time: props.data.time,
             date: props.data.date
         }
-        console.log("rendering card for first time")
-        console.log(this.state.data)
 	}
 
 	render(){
