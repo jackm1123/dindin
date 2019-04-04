@@ -1,5 +1,5 @@
 import React from 'react';
-import { TouchableOpacity, Animated, StyleSheet, Text, View, Button, Image, ScrollView, ListView, Dimensions, StatusBar, } from 'react-native';
+import { TouchableOpacity, Animated, StyleSheet, Text, View, Button, Image, Dimensions, } from 'react-native';
 import {HeaderBackButton} from 'react-navigation'
 import PendingScrollView from './PendingScrollView';
 import EventScrollView from './EventScrollView';
@@ -133,89 +133,87 @@ export default class HomeScreen extends React.Component {
 
     this.writeUserData(this.props.navigation.state.params.profile.name)
 
-
-
     january = () => (
       <View style={styles.container}>
         <PendingScrollView data={this.state.snapshot} userid={this.props.navigation.state.params.profile.id}/>
-        <EventScrollView data={this.state.snapshot.accepted.january} pending={this.state.snapshot}/>
+        <EventScrollView data={this.state.snapshot.accepted.january} pending={this.state.snapshot} month={0}/>
     </View>
     )
 
     february = () => (
       <View style={styles.container}>
       <PendingScrollView data={this.state.snapshot} userid={this.props.navigation.state.params.profile.id}/>
-      <EventScrollView data={this.state.snapshot.accepted.february} pending={this.state.snapshot}/>
+      <EventScrollView data={this.state.snapshot.accepted.february} pending={this.state.snapshot} month={1}/>
     </View>
     )
 
     march = () => (
       <View style={styles.container}>
       <PendingScrollView data={this.state.snapshot} userid={this.props.navigation.state.params.profile.id}/>
-      <EventScrollView data={this.state.snapshot.accepted.march} pending={this.state.snapshot}/>
+      <EventScrollView data={this.state.snapshot.accepted.march} pending={this.state.snapshot} month={2}/>
     </View>
     )
 
     april = () => (
       <View style={styles.container}>
       <PendingScrollView data={this.state.snapshot} userid={this.props.navigation.state.params.profile.id}/>
-      <EventScrollView data={this.state.snapshot.accepted.april} pending={this.state.snapshot}/>
+      <EventScrollView data={this.state.snapshot.accepted.april} pending={this.state.snapshot} month={3}/>
     </View>
     )
 
     may = () => (
       <View style={styles.container}>
       <PendingScrollView data={this.state.snapshot} userid={this.props.navigation.state.params.profile.id}/>
-      <EventScrollView data={this.state.snapshot.accepted.may} pending={this.state.snapshot}/>
+      <EventScrollView data={this.state.snapshot.accepted.may} pending={this.state.snapshot} month={4}/>
     </View>
     )
 
     june = () => (
       <View style={styles.container}>
       <PendingScrollView data={this.state.snapshot} userid={this.props.navigation.state.params.profile.id}/>
-      <EventScrollView data={this.state.snapshot.accepted.june} pending={this.state.snapshot}/>
+      <EventScrollView data={this.state.snapshot.accepted.june} pending={this.state.snapshot} month={5}/>
     </View>
     )
 
     july = () => (
       <View style={styles.container}>
       <PendingScrollView data={this.state.snapshot} userid={this.props.navigation.state.params.profile.id}/>
-      <EventScrollView data={this.state.snapshot.accepted.july} pending={this.state.snapshot}/>
+      <EventScrollView data={this.state.snapshot.accepted.july} pending={this.state.snapshot} month={6}/>
     </View>
     )
 
     august = () => (
       <View style={styles.container}>
       <PendingScrollView data={this.state.snapshot} userid={this.props.navigation.state.params.profile.id}/>
-      <EventScrollView data={this.state.snapshot.accepted.august} pending={this.state.snapshot}/>
+      <EventScrollView data={this.state.snapshot.accepted.august} pending={this.state.snapshot} month={7}/>
     </View>
     )
 
     september = () => (
       <View style={styles.container}>
       <PendingScrollView data={this.state.snapshot} userid={this.props.navigation.state.params.profile.id}/>
-      <EventScrollView data={this.state.snapshot.accepted.september} pending={this.state.snapshot}/>
+      <EventScrollView data={this.state.snapshot.accepted.september} pending={this.state.snapshot} month={8}/>
     </View>
     )
 
     october = () => (
       <View style={styles.container}>
       <PendingScrollView data={this.state.snapshot} userid={this.props.navigation.state.params.profile.id}/>
-      <EventScrollView data={this.state.snapshot.accepted.october} pending={this.state.snapshot}/>
+      <EventScrollView data={this.state.snapshot.accepted.october} pending={this.state.snapshot} month={9}/>
     </View>
     )
 
     november = () => (
       <View style={styles.container}>
       <PendingScrollView data={this.state.snapshot} userid={this.props.navigation.state.params.profile.id}/>
-      <EventScrollView data={this.state.snapshot.accepted.november} pending={this.state.snapshot}/>
+      <EventScrollView data={this.state.snapshot.accepted.november} pending={this.state.snapshot} month={10}/>
     </View>
     )
 
     december = () => (
       <View style={styles.container}>
       <PendingScrollView data={this.state.snapshot} userid={this.props.navigation.state.params.profile.id}/>
-      <EventScrollView data={this.state.snapshot.accepted.december} pending={this.state.snapshot}/>
+      <EventScrollView data={this.state.snapshot.accepted.december} pending={this.state.snapshot} month={11}/>
     </View>
     )
 

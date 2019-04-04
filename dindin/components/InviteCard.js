@@ -1,5 +1,5 @@
 import * as React from 'react'
-import {View, Text, StyleSheet, Image, TouchableOpacity, ImageBackground, Button} from 'react-native'
+import {View, Text, StyleSheet, Image, TouchableOpacity, Button} from 'react-native'
 import * as firebase from 'firebase';
 
 //Initialize Firebase
@@ -20,6 +20,8 @@ const monthcaps = ["January", "February", "March", "April", "May", "June",
   "July", "August", "September", "October", "November", "December"
 ];
 
+const weekday = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
+
 export default class InviteCard extends React.Component{
 
 	constructor(props){
@@ -38,14 +40,6 @@ export default class InviteCard extends React.Component{
 
 
 	render(){
-        const weekday = new Array(7);
-        weekday[0] = "Sunday";
-        weekday[1] = "Monday";
-        weekday[2] = "Tuesday";
-        weekday[3] = "Wednesday";
-        weekday[4] = "Thursday";
-        weekday[5] = "Friday";
-        weekday[6] = "Saturday";
         const ddate = new Date(this.state.date);
         return(
             <View style={[styles.container, {backgroundColor: this.state.backgroundColor}]}>
@@ -57,7 +51,7 @@ export default class InviteCard extends React.Component{
 
                     <View style={{flexDirection: 'column'}}>
                         <Text style={{fontSize: 16, color: 'black'}}>{this.state.host}</Text>
-                        <Text style={{fontSize: 15, color: 'gray'}}>{weekday[ddate.getDay()]} {ddate.getDay()} {monthcaps[ddate.getMonth()]}</Text>
+                        <Text style={{fontSize: 15, color: 'gray'}}>{weekday[ddate.getDay()]} {ddate.getDate()} {monthcaps[ddate.getMonth()]}</Text>
                         <Text style={{fontSize: 15, color: 'gray'}}>{this.state.time}</Text>
                     </View>
                 </View>

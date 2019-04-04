@@ -26,10 +26,11 @@ const monthcaps = ["January", "February", "March", "April", "May", "June",
 
 export default class EventCard extends React.Component {
   constructor(props) {
+    console.log("logging myeventcard props")
+    console.log(props)
     super(props);
     this.state={
         data: props.data,
-        host: props.data.host,
         time: props.data.time,
         date: props.data.date,
     }
@@ -45,11 +46,10 @@ export default class EventCard extends React.Component {
         <View style={{flexDirection: 'row',flex:1, alignItems:'center'}}>
             <Image style={{borderRadius:30, height: 60, width: 60, margin: 10}} source ={require('../assets/profile.jpg')}/>
             <View style={{flexDirection:'column',flex:1}}>
-                <Text style={{fontSize:17}}>{this.state.host}</Text>
+                <Text style={{fontSize:17}}>Dinner host by You</Text>
                 <Text style={{fontSize:14,color:'grey'}}>{this.state.time}</Text>
             </View>
-            <Image style={styles.cardImage} source ={require('../assets/phone.png')}/>
-            <Image style={styles.cardImage} source ={require('../assets/email.png')}/>
+            <Image style={styles.cardImage} source ={require('../assets/arrow.png')}/>
         </View>
       </View>
     );
@@ -67,7 +67,8 @@ const styles = StyleSheet.create({
     },
     cardImage:{
         margin:10,
-        height: 40,
-        width: 40,
+        height: 15,
+        width: 15,
+        resizeMode: 'contain',
     }
 })

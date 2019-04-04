@@ -3,6 +3,7 @@ import {StyleSheet, Text, View, Image, FlatList} from 'react-native'
 import InviteCard from './InviteCard';
 import * as firebase from 'firebase';
 
+
 //Initialize Firebase
 var config = {
     databaseURL: "https://dindind-ffbf6.firebaseio.com/",
@@ -86,6 +87,7 @@ export default class EventScrollView extends React.Component{
                         renderItem={this.renderRow}
                         keyExtractor={this.keyExtractor}
                         ListEmptyComponent={this._listEmptyComponent}
+                        showsHorizontalScrollIndicator={false}
                     />
                 </View>
             )
