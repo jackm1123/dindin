@@ -17,6 +17,9 @@ const numDaysInMonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
 
 export default class EventScrollView extends React.Component{
 
+    /* NOTE: CANNOT HAVE 2 EVENTS SAME DAY OR THINGS MESS UP */
+    /* NOTHING PREVENTS IT BUT IT BREAKS SYSTEM */
+
     constructor(props){
         super(props)
 
@@ -120,6 +123,8 @@ export default class EventScrollView extends React.Component{
                         new_arr.push({date: (month_index + 1).toString() + "/" + i.toString() + "/2019", host: "null"})
                     }
                 }
+                //console.log("new arr3")
+                //console.log(new_arr)
                 this.state={
                     flex:1,
                     eventList: new_arr,

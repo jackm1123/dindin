@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import HomeScreen from './components/HomeScreen'
 import SplashScreen from './components/SplashScreen'
+import InvitationDetailsScreen from './components/InvitationDetailsScreen'
 import {createAppContainer,createStackNavigator} from 'react-navigation'
 import * as firebase from 'firebase';
 
@@ -28,6 +29,12 @@ const rootStack = createStackNavigator({
       header: null,
     }
   },
+  InvitationDetailsScreen: {
+    screen: InvitationDetailsScreen,
+    navigationOptions:{
+      headerMode: 'float'
+    }
+  }
 },{
   initialRouteName: 'Splash',
 })

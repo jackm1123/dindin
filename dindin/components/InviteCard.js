@@ -30,19 +30,17 @@ export default class InviteCard extends React.Component{
             host: props.data.host,
             time: props.data.time,
             date: props.data.date,
+            address: props.data.address,
             id: props.data.id,
             userid: props.userid,
             backgroundColor: '#F8F8F8',
         }
-
 	}
-
-
 
 	render(){
         const ddate = new Date(this.state.date);
         return(
-            <View style={[styles.container, {backgroundColor: this.state.backgroundColor}]}>
+            <TouchableOpacity style={[styles.container, {backgroundColor: this.state.backgroundColor}]} onPress={()=> this.props.navigation.navigate('InvitationDetailsScreen', this.state)}>
                 <View style={{flexDirection: 'row', flex: 'end',}}>
                     <View>
                         <Image style={{borderRadius:30, height: 60, width: 60, margin: 10,}} source={require('../assets/profile.jpg')}>
@@ -104,7 +102,7 @@ export default class InviteCard extends React.Component{
                         </TouchableOpacity>
                     </View>
                 </View>
-            </View>
+            </TouchableOpacity>
             
         )
     }

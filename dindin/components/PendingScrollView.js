@@ -60,7 +60,7 @@ export default class EventScrollView extends React.Component{
     	renderRow({item}){
 	        return(
             <View style={styles.rowContainer}>
-                <InviteCard data={item} userid={currContext.state.userid}/>
+                <InviteCard data={item} userid={renderContext.state.userid} navigation={renderContext.props.navigation}/>
             </View>
             )
     	}
@@ -77,7 +77,7 @@ export default class EventScrollView extends React.Component{
 
         render(){
             if(this.state.invitations !== null){
-            currContext = this
+            renderContext = this
             return(
                 <View style={styles.container}>
                     <Text style={{alignItems: 'center'}}> Pending ({this.state.invitations.length}) </Text>

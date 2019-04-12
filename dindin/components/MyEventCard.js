@@ -26,8 +26,6 @@ const monthcaps = ["January", "February", "March", "April", "May", "June",
 
 export default class EventCard extends React.Component {
   constructor(props) {
-    console.log("logging myeventcard props")
-    console.log(props)
     super(props);
     this.state={
         data: props.data,
