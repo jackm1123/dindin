@@ -13,6 +13,7 @@
     "i18next": "^15.0.4",
     "i18next-react-native-language-detector": "^1.0.2",
     "react": "16.5.0",
+    "react-geocode": "^0.1.2",
     "react-native": "https://github.com/expo/react-native/archive/sdk-32.0.0.tar.gz",
     "react-native-locale-detector": "^1.0.1",
     "react-native-localization": "^2.1.0",

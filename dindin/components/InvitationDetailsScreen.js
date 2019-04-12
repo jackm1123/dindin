@@ -2,6 +2,7 @@ import React from 'react';
 import {View, Text, StyleSheet, Image, TouchableOpacity, Button, Dimensions} from 'react-native';
 import {Permissions, Location, MapView, Constants} from 'expo';
 import * as firebase from 'firebase';
+import Geocode from "react-geocode";
 
 //Initialize Firebase
 var config = {
@@ -35,6 +36,8 @@ export default class InvitationDetailsScreen extends React.Component {
 
 	constructor(props){
 		super(props)
+		Geocode.setApiKey("AIzaSyC01WGGqQ_6fkdF_nJNUj4q9G6WF7BUXTs");
+
 	    this.state = {
 	        host: props.navigation.state.params.host,
 	        time: props.navigation.state.params.time,
@@ -45,28 +48,14 @@ export default class InvitationDetailsScreen extends React.Component {
 	        mapRegion: { latitude: 37.78825, longitude: -122.4324, latitudeDelta: 0.0922, longitudeDelta: 0.0421 },
 		    locationResult: null,
 		    location: {coords: { latitude: 37.78825, longitude: -122.4324}},
+		    dest_location: { latitude: 0, longitude: 0},
 	    }
 	}
 
-
-
-
-
-
-
-
-
-	// need to make these so that constant touching the map doesn't rerender
-
-
-
-
 	componentDidMount() {
+		//get the coordinates of current user location and of address of restaurant
 		this._getLocationAsync();
-	}
-
-	_handleMapRegionChange = mapRegion => {
-		this.setState({ mapRegion });
+		this._getCoordAsync();
 	}
 
 	_getLocationAsync = async () => {
@@ -81,16 +70,24 @@ export default class InvitationDetailsScreen extends React.Component {
 		this.setState({ locationResult: JSON.stringify(location), location, });
 	}
 
-
-
-
-
-
-
+	_getCoordAsync =  async () => {
+		Geocode.fromAddress(this.state.address).then(
+			response => {
+			    const { lat, lng } = response.results[0].geometry.location;
+			    this.setState({
+			    	dest_location: {latitude: lat, longitude: lng},
+				})
+			},
+			error => {
+			    console.error(error);
+			}
+		);
+	}
 
 
 	render(){
 		const ddate = new Date(this.state.date);
+		renderContext = this
 		return(
 			<View>
 				<View style={styles.container}>
@@ -99,11 +96,10 @@ export default class InvitationDetailsScreen extends React.Component {
                         </Image>
                     </View>
                     <View style={{flexDirection: 'column', alignItems: 'center'}}>
-                        <Text style={{fontSize: 20, color: 'black'}}>{this.state.address}</Text>
+                        <Text style={{fontSize: 20, color: 'black'}}>{((this.state.address).split(','))[0]}</Text>
                         <Text style={{fontSize: 15, color: 'black'}}>{weekday[ddate.getDay()]} {ddate.getDate()} {monthcaps[ddate.getMonth()]} - {this.state.time}</Text>
                         <Text style={{fontSize: 15, color: 'gray'}}>Hosted by {this.state.host}</Text>
                 	</View>
-
                 	<Text></Text>
                 	<Text></Text>
                 	<Text></Text>
@@ -114,9 +110,8 @@ export default class InvitationDetailsScreen extends React.Component {
 
 	                            userid = this.state.userid
 	                            id = this.state.id
-	                            setTimeout(function(){ 
-	                                firebase.database().ref('Users/' + userid + '/invitations/' + id).remove();
-	                            }, 1000);
+	                            firebase.database().ref('Users/' + userid + '/invitations/' + id).remove();
+	                            this.props.navigation.goBack()
 	                        }}>
 	                            <View style={{flexDirection: 'row'}}> 
 	                                <Image style={{width: 20, height: 20,}} source={require('../assets/ex.png')}></Image>
@@ -134,19 +129,20 @@ export default class InvitationDetailsScreen extends React.Component {
 	                            date = this.state.date;
 	                            host = this.state.host;
 	                            time = this.state.time;
+	                            address = this.state.address;
 	                            const d = new Date((this.state.date).toString());
 	                            month = monthNames[d.getMonth()];
 	                            userid = this.state.userid
 	                            id = this.state.id
 
-	                            setTimeout(function(){ 
-	                                firebase.database().ref('Users/' + userid + '/invitations/' + id).remove();
-	                                firebase.database().ref('Users/' + userid + '/accepted/' + month + '/').push({
-	                                    date,
-	                                    host,
-	                                    time
-	                                });
-	                            }, 1000);
+                                firebase.database().ref('Users/' + userid + '/invitations/' + id).remove();
+                                firebase.database().ref('Users/' + userid + '/accepted/' + month + '/').push({
+                                    date,
+                                    host,
+                                    time,
+                                    address,
+                                });
+                                this.props.navigation.goBack()
 	                        }}>
 	                            <View style={{flexDirection: 'row'}}> 
 	                                <Image style={{width: 20, height: 20,}} source={require('../assets/check.png')}></Image>
@@ -158,25 +154,21 @@ export default class InvitationDetailsScreen extends React.Component {
 
 	        	</View>
 	        	<View>
-	        		<Text>need to make it scrollable, </Text>
-	        		<Text> https://snack.expo.io/@professorxii/expo-map-and-location-example </Text>
-	        		<Text> https://snack.expo.io/SkqC-nNs- </Text>
 					<View style={{flex: 1}}>
 				        <MapView
 				          style={{ alignSelf: 'stretch', height: ht-280 }}
 				          region={{ latitude: this.state.location.coords.latitude, longitude: this.state.location.coords.longitude, latitudeDelta: 0.0922, longitudeDelta: 0.0421 }}
-				          onRegionChange={this._handleMapRegionChange}
 				        >
 						    <MapView.Marker
 						      coordinate={this.state.location.coords}
 						      title="Current Location"
 						    />
+						    <MapView.Marker
+						      coordinate={this.state.dest_location}
+						      title={((this.state.address).split(','))[0]}
+						    />
 				        </MapView>      
 				    </View>
-
-
-
-
 	        	</View>
         	</View>
 		)
@@ -196,12 +188,6 @@ const styles = StyleSheet.create(
 		    paddingTop: 14,
 		    paddingBottom: 16,
         },
-
-        title:{
-            color: '#333',
-    		fontSize: 16,
-        },
-        
     }
 )
 
