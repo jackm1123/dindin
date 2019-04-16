@@ -3,8 +3,8 @@ Sources used:
 https://www.lynda.com/React-Native-tutorials/Creating-animation-loop/560343/672458-4.html
 https://facebook.github.io/react-native/docs/animations
 */
-import React from 'react'
-import {Animated, View, StyleSheet, ImageBackground, Image, TouchableHighlight, Text, Dimensions, Alert} from 'react-native'
+import React from 'react';
+import {Animated, View, StyleSheet, ImageBackground, Image, TouchableHighlight, Text, Dimensions, Alert} from 'react-native';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import { Localization } from 'expo-localization';
 import { StackNavigator } from 'react-navigation';
@@ -29,11 +29,11 @@ class FadeInView extends React.Component {
   }
 
   async componentDidMount(){
-    this.animateFade()
+    this.animateFade();
   }
 
   render() {
-    let { fadeAnim } = this.state
+    let { fadeAnim } = this.state;
 
 
 /* {this.props.children} is used to display whatever you include between
@@ -51,7 +51,7 @@ this.props.style is used for inheriting from classes around it*/
 
 export default class SplashScreen extends React.Component{
   constructor(props){
-    super(props)
+    super(props);
   }
 
   /* Facebook login */
@@ -94,12 +94,12 @@ export default class SplashScreen extends React.Component{
     }
   }
 
-  render(){
+  render() {
 
     /* Internationalization */
-    let localString = "Connecting food lovers"
+    let localString = "Connecting food lovers";
     if (Localization.locale === "ar-US"){
-      localString = "توصيل عشاق الطعام"
+      localString = "توصيل عشاق الطعام";
     }
 
     return(

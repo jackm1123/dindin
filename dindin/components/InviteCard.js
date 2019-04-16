@@ -19,12 +19,12 @@ const monthcaps = ["January", "February", "March", "April", "May", "June",
   "July", "August", "September", "October", "November", "December"
 ];
 
-const weekday = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
+const weekday = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 
 export default class InviteCard extends React.Component{
 
-	constructor(props){
-		super(props)
+  constructor(props){
+    super(props);
         this.state = {
             host: props.data.host,
             time: props.data.time,
@@ -34,9 +34,9 @@ export default class InviteCard extends React.Component{
             userid: props.userid,
             backgroundColor: '#F8F8F8',
         }
-	}
+  }
 
-	render(){
+  render(){
         const ddate = new Date(this.state.date);
         return(
             <TouchableOpacity style={[styles.container, {backgroundColor: this.state.backgroundColor}]} onPress={()=> this.props.navigation.navigate('InvitationDetailsScreen', this.state)}>
@@ -112,16 +112,16 @@ const styles = StyleSheet.create(
             height: 150,
             width: 300,
             backgroundColor: '#F8F8F8',
-		    borderColor: 'transparent',
-		    borderWidth: 1,
-		    paddingLeft: 16,
-		    paddingTop: 14,
-		    paddingBottom: 16,
+        borderColor: 'transparent',
+        borderWidth: 1,
+        paddingLeft: 16,
+        paddingTop: 14,
+        paddingBottom: 16,
         },
 
         title:{
             color: '#333',
-    		fontSize: 16,
+        fontSize: 16,
         },
         
     }

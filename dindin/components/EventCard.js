@@ -11,7 +11,7 @@ if (!firebase.apps.length) {
   firebase.initializeApp(config);
 }
 
-const weekday = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
+const weekday = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 
 const monthcaps = ["January", "February", "March", "April", "May", "June",
   "July", "August", "September", "October", "November", "December"

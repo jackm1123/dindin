@@ -1,5 +1,5 @@
-import * as React from 'react'
-import {StyleSheet, Text, View, FlatList} from 'react-native'
+import * as React from 'react';
+import {StyleSheet, Text, View, FlatList} from 'react-native';
 import InviteCard from './InviteCard';
 import * as firebase from 'firebase';
 
@@ -15,45 +15,45 @@ if (!firebase.apps.length) {
 
 export default class EventScrollView extends React.Component{
 	    constructor(props){
-        	super(props)
+        	super(props);
             if (props.data.invitations === null || props.data.invitations === undefined){
                 this.state={
                     invitations: [],
                     userid: props.userid,
-                }
+                };
             }
             else{
-                invts = Object.values(props.data.invitations)
-                invtids = Object.keys(props.data.invitations)
+                invts = Object.values(props.data.invitations);
+                invtids = Object.keys(props.data.invitations);
                 for (i = 0; i < invts.length; i++){
-                    invts[i].id = invtids[i]
+                    invts[i].id = invtids[i];
                 }
             	this.state ={
                		invitations: invts,
                     userid: props.userid,
-            	}
+            	};
             }  
     	}
 
     	componentWillReceiveProps(nextProps) {
             if (nextProps.data.invitations === null || nextProps.data.invitations === undefined){
                 this.setState({ invitations: [],
-                                userid: props.userid, })
+                                userid: props.userid, });
             }
             else{
-                invts = Object.values(nextProps.data.invitations)
-                invtids = Object.keys(nextProps.data.invitations)
+                invts = Object.values(nextProps.data.invitations);
+                invtids = Object.keys(nextProps.data.invitations);
                 for (i = 0; i < invts.length; i++){
-                    invts[i].id = invtids[i]
+                    invts[i].id = invtids[i];
                 }
                 this.setState({ invitations: invts,
-                                userid: props.userid, })
+                                userid: props.userid, });
             }
     	}
 
         //unique keys always have to be string
     	keyExtractor(item){
-        	return item.host.toString() + item.date.toString() + item.time.toString()
+        	return item.host.toString() + item.date.toString() + item.time.toString();
     	}
 
     	renderRow({item}){
@@ -74,7 +74,7 @@ export default class EventScrollView extends React.Component{
 
         render(){
             if(this.state.invitations !== null){
-            renderContext = this
+            renderContext = this;
                 return(
                     <View style={styles.container}>
                         <Text style={{alignItems: 'center'}}> Pending ({this.state.invitations.length}) </Text>
