@@ -1,5 +1,5 @@
 import * as React from 'react'
-import {StyleSheet, Text, View, Image, FlatList} from 'react-native'
+import {StyleSheet, Text, View, FlatList} from 'react-native'
 import InviteCard from './InviteCard';
 import * as firebase from 'firebase';
 
@@ -51,11 +51,10 @@ export default class EventScrollView extends React.Component{
             }
     	}
 
-        //keys always have to be string
+        //unique keys always have to be string
     	keyExtractor(item){
         	return item.host.toString() + item.date.toString() + item.time.toString()
     	}
-
 
     	renderRow({item}){
 	        return(
@@ -65,6 +64,7 @@ export default class EventScrollView extends React.Component{
             )
     	}
 
+        //remove pending invite carousel when none there
         _listEmptyComponent(){
             return (
                 <View>
@@ -72,32 +72,28 @@ export default class EventScrollView extends React.Component{
             )
         }
 
-
-
-
         render(){
             if(this.state.invitations !== null){
             renderContext = this
-            return(
-                <View style={styles.container}>
-                    <Text style={{alignItems: 'center'}}> Pending ({this.state.invitations.length}) </Text>
-                     <FlatList
-                        horizontal
-                        data={this.state.invitations}
-                        renderItem={this.renderRow}
-                        keyExtractor={this.keyExtractor}
-                        ListEmptyComponent={this._listEmptyComponent}
-                        showsHorizontalScrollIndicator={false}
-                    />
-                </View>
-            )
-            }else{
+                return(
+                    <View style={styles.container}>
+                        <Text style={{alignItems: 'center'}}> Pending ({this.state.invitations.length}) </Text>
+                         <FlatList
+                            horizontal
+                            data={this.state.invitations}
+                            renderItem={this.renderRow}
+                            keyExtractor={this.keyExtractor}
+                            ListEmptyComponent={this._listEmptyComponent}
+                            showsHorizontalScrollIndicator={false}
+                        />
+                    </View>
+                )
+            }
+            else{
                 return(<View style={{flex:1}}/>)
             }
         }
-
 }
-
 
 const styles = StyleSheet.create(
     {
@@ -118,6 +114,3 @@ const styles = StyleSheet.create(
 
     }
 )
-
-
-

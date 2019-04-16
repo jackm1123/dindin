@@ -1,5 +1,5 @@
 import * as React from 'react'
-import {StyleSheet, Text, View, Image, FlatList, Dimensions} from 'react-native'
+import {StyleSheet, Text, View, Image, FlatList, Dimensions, TouchableOpacity,} from 'react-native'
 import EventCard from './EventCard';
 import MyEventCard from './MyEventCard';
 
@@ -149,11 +149,12 @@ export default class EventScrollView extends React.Component{
             return(
                 <View>
                     <Text style={{fontWeight: "bold"}}>{weekday[ddate.getDay()]} {ddate.getDate()} {monthcaps[ddate.getMonth()]}</Text>
-                    <View style={styles.rowContainer}>
-                    <Image style={{margin: 15, height: 35, resizeMode: 'contain', alignItems: 'center',}} source={require('../assets/addevent.png')}>
-                    </Image>
-                    </View>
-                        
+                    <TouchableOpacity onPress={()=> renderContext.props.navigation.navigate('CreateEvent', this.state)}>
+                        <View style={styles.rowContainer}>
+                            <Image style={{margin: 15, height: 35, resizeMode: 'contain', alignItems: 'center',}} source={require('../assets/addevent.png')}>
+                            </Image>
+                        </View>
+                    </TouchableOpacity>    
                 </View>
             )
         }
@@ -169,8 +170,7 @@ export default class EventScrollView extends React.Component{
     }
 
     render(){
-
-
+        renderContext = this
 
         if(this.state.eventList !== null){
         return(

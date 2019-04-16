@@ -1,6 +1,6 @@
 import React from 'react';
-import {View, Text, StyleSheet, Image, TouchableOpacity, Button, Dimensions} from 'react-native';
-import {Permissions, Location, MapView, Constants} from 'expo';
+import {View, Text, StyleSheet, Image, TouchableOpacity, Dimensions} from 'react-native';
+import {Permissions, Location, MapView} from 'expo';
 import * as firebase from 'firebase';
 import Geocode from "react-geocode";
 
@@ -30,7 +30,7 @@ export default class InvitationDetailsScreen extends React.Component {
 	static navigationOptions = ({ navigation }) => ({
 	    title: 'DinDin',
 		headerBackTitleStyle: {
-	      color: 'white',
+	    	color: 'white',
 	    },
 	 })
 
@@ -174,7 +174,6 @@ export default class InvitationDetailsScreen extends React.Component {
 		)
 	}
 }
-
 
 
 const styles = StyleSheet.create(

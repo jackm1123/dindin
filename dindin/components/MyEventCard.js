@@ -1,13 +1,8 @@
 import React from 'react';
 import * as firebase from 'firebase';
-import {
-    StyleSheet,
-    Text,
-    View,
-    Button,
-    Image,
-  } from 'react-native';
- 
+import { StyleSheet, Text, View, Image} from 'react-native';
+
+//Initialize Firebase
 var config = {
   databaseURL: 'https://dindind-ffbf6.firebaseio.com/',
   projectId: 'dindind-ffbf6>',
@@ -16,13 +11,11 @@ if (!firebase.apps.length) {
   firebase.initializeApp(config);
 }
 
-
 const weekday = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
 
 const monthcaps = ["January", "February", "March", "April", "May", "June",
   "July", "August", "September", "October", "November", "December"
 ];
-
 
 export default class EventCard extends React.Component {
   constructor(props) {

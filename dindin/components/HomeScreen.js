@@ -1,10 +1,8 @@
 import React from 'react';
-import { TouchableOpacity, Animated, StyleSheet, Text, View, Button, Image, Dimensions, } from 'react-native';
-import {HeaderBackButton} from 'react-navigation'
+import { TouchableOpacity, Animated, StyleSheet, Text, View, Image, Dimensions} from 'react-native';
 import PendingScrollView from './PendingScrollView';
 import EventScrollView from './EventScrollView';
 import { TabView, SceneMap } from 'react-native-tab-view';
-import {Constants} from 'expo';
 import * as firebase from 'firebase';
 
 //Initialize Firebase
@@ -16,13 +14,6 @@ if (!firebase.apps.length) {
     firebase.initializeApp(config);
 }
 
-
-/*
-onPress={() => this.props.navigation.navigate('Home')}
-*/
-
-
-
 /*Customize Back button in header*/
 class MyCustomHeaderBackImage extends React.Component {
   render() {
@@ -33,12 +24,14 @@ class MyCustomHeaderBackImage extends React.Component {
         style={[styles2.myCustomHeaderBackImage, this.props.style]}
       />
     );
-  }
-}
+  };
+};
+
+
 
 export default class HomeScreen extends React.Component {
     
-  static navigationOptions = ({ navigation }) => ({
+  static navigationOptions = () => ({
     title: 'DinDin',
     headerBackImage: (
       <MyCustomHeaderBackImage />
@@ -54,22 +47,10 @@ export default class HomeScreen extends React.Component {
       /> 
     ),
   })
-    /*
-    headerRight: (
-      <Button
-        onPress={()=>navigation.navigate('Splash')} 
-        style={styles2.myCustomHeaderBackImage}
-        title="me"
-      /> 
-    ),
-    
-    */
-  
-
 
   constructor(props){
-    super(props)
-    this.readUserData(this.props.navigation.state.params.profile.id)
+    super(props);
+    this.readUserData(this.props.navigation.state.params.profile.id);
     this.state = {snapshot: "",
                   index: 0,
                   routes: [
@@ -86,30 +67,26 @@ export default class HomeScreen extends React.Component {
                     { key: 'november', title: 'N' },
                     { key: 'december', title: 'D' },
                   ],
-    }
-  }
+    };
+  };
 
   readUserData(path) {
       currentContext = this 
       firebase.database().ref('Users/' + path).on('value', function (snapshot) {
           currentContext.setState({
               snapshot: snapshot.val()
-          })
+          });
       });
-
-  }
+  };
 
   writeUserData(name){
-      id = this.props.navigation.state.params.profile.id
-
+      id = this.props.navigation.state.params.profile.id;
       firebase.database().ref('Users/' + id).update({
           name
-      })
-  }
+      });
+  };
 
-  //needs a stupid key specified for any mapping or react native gets angry
-  _renderTabBar = props => {
-    const inputRange = props.navigationState.routes.map((x, i) => i);
+  renderTabBar = props => {
     return (
       <View style={{flexDirection: 'row', paddingTop: 10,}}>
         {props.navigationState.routes.map((route, i) => {
@@ -120,7 +97,7 @@ export default class HomeScreen extends React.Component {
           } 
           return (
             <TouchableOpacity
-              key={Math.random().toString()}
+              key={Math.random().toString()} //to avoid unique key mapping warnings
               style={{flex: 1, alignItems: 'center', padding: 4,}}
               onPress={() => this.setState({ index: i })}>
               <Animated.Text style={{ color }}>{route.title}</Animated.Text>
@@ -132,93 +109,94 @@ export default class HomeScreen extends React.Component {
   };
 
   render() {
+    this.writeUserData(this.props.navigation.state.params.profile.name) //write your user to DB if its new first time on app
 
-    this.writeUserData(this.props.navigation.state.params.profile.name)
-
+    //define rendering methods for each month in calendar tab view
     january = () => (
       <View style={styles.container}>
         <PendingScrollView data={this.state.snapshot} userid={this.props.navigation.state.params.profile.id} navigation={this.props.navigation}/>
-        <EventScrollView data={this.state.snapshot.accepted.january} pending={this.state.snapshot} month={0}/>
+        <EventScrollView data={this.state.snapshot.accepted.january} pending={this.state.snapshot} month={0} navigation={this.props.navigation}/>
     </View>
     )
 
     february = () => (
       <View style={styles.container}>
       <PendingScrollView data={this.state.snapshot} userid={this.props.navigation.state.params.profile.id} navigation={this.props.navigation}/>
-      <EventScrollView data={this.state.snapshot.accepted.february} pending={this.state.snapshot} month={1}/>
+      <EventScrollView data={this.state.snapshot.accepted.february} pending={this.state.snapshot} month={1} navigation={this.props.navigation}/>
     </View>
     )
 
     march = () => (
       <View style={styles.container}>
       <PendingScrollView data={this.state.snapshot} userid={this.props.navigation.state.params.profile.id} navigation={this.props.navigation}/>
-      <EventScrollView data={this.state.snapshot.accepted.march} pending={this.state.snapshot} month={2}/>
+      <EventScrollView data={this.state.snapshot.accepted.march} pending={this.state.snapshot} month={2} navigation={this.props.navigation}/>
     </View>
     )
 
     april = () => (
       <View style={styles.container}>
       <PendingScrollView data={this.state.snapshot} userid={this.props.navigation.state.params.profile.id} navigation={this.props.navigation}/>
-      <EventScrollView data={this.state.snapshot.accepted.april} pending={this.state.snapshot} month={3}/>
+      <EventScrollView data={this.state.snapshot.accepted.april} pending={this.state.snapshot} month={3} navigation={this.props.navigation}/>
     </View>
     )
 
     may = () => (
       <View style={styles.container}>
       <PendingScrollView data={this.state.snapshot} userid={this.props.navigation.state.params.profile.id} navigation={this.props.navigation}/>
-      <EventScrollView data={this.state.snapshot.accepted.may} pending={this.state.snapshot} month={4}/>
+      <EventScrollView data={this.state.snapshot.accepted.may} pending={this.state.snapshot} month={4} navigation={this.props.navigation}/>
     </View>
     )
 
     june = () => (
       <View style={styles.container}>
       <PendingScrollView data={this.state.snapshot} userid={this.props.navigation.state.params.profile.id} navigation={this.props.navigation}/>
-      <EventScrollView data={this.state.snapshot.accepted.june} pending={this.state.snapshot} month={5}/>
+      <EventScrollView data={this.state.snapshot.accepted.june} pending={this.state.snapshot} month={5} navigation={this.props.navigation}/>
     </View>
     )
 
     july = () => (
       <View style={styles.container}>
       <PendingScrollView data={this.state.snapshot} userid={this.props.navigation.state.params.profile.id} navigation={this.props.navigation}/>
-      <EventScrollView data={this.state.snapshot.accepted.july} pending={this.state.snapshot} month={6}/>
+      <EventScrollView data={this.state.snapshot.accepted.july} pending={this.state.snapshot} month={6} navigation={this.props.navigation}/>
     </View>
     )
 
     august = () => (
       <View style={styles.container}>
       <PendingScrollView data={this.state.snapshot} userid={this.props.navigation.state.params.profile.id} navigation={this.props.navigation}/>
-      <EventScrollView data={this.state.snapshot.accepted.august} pending={this.state.snapshot} month={7}/>
+      <EventScrollView data={this.state.snapshot.accepted.august} pending={this.state.snapshot} month={7} navigation={this.props.navigation}/>
     </View>
     )
 
     september = () => (
       <View style={styles.container}>
       <PendingScrollView data={this.state.snapshot} userid={this.props.navigation.state.params.profile.id} navigation={this.props.navigation}/>
-      <EventScrollView data={this.state.snapshot.accepted.september} pending={this.state.snapshot} month={8}/>
+      <EventScrollView data={this.state.snapshot.accepted.september} pending={this.state.snapshot} month={8} navigation={this.props.navigation}/>
     </View>
     )
 
     october = () => (
       <View style={styles.container}>
       <PendingScrollView data={this.state.snapshot} userid={this.props.navigation.state.params.profile.id} navigation={this.props.navigation}/>
-      <EventScrollView data={this.state.snapshot.accepted.october} pending={this.state.snapshot} month={9}/>
+      <EventScrollView data={this.state.snapshot.accepted.october} pending={this.state.snapshot} month={9} navigation={this.props.navigation}/>
     </View>
     )
 
     november = () => (
       <View style={styles.container}>
       <PendingScrollView data={this.state.snapshot} userid={this.props.navigation.state.params.profile.id} navigation={this.props.navigation}/>
-      <EventScrollView data={this.state.snapshot.accepted.november} pending={this.state.snapshot} month={10}/>
+      <EventScrollView data={this.state.snapshot.accepted.november} pending={this.state.snapshot} month={10} navigation={this.props.navigation}/>
     </View>
     )
 
     december = () => (
       <View style={styles.container}>
       <PendingScrollView data={this.state.snapshot} userid={this.props.navigation.state.params.profile.id} navigation={this.props.navigation}/>
-      <EventScrollView data={this.state.snapshot.accepted.december} pending={this.state.snapshot} month={11}/>
+      <EventScrollView data={this.state.snapshot.accepted.december} pending={this.state.snapshot} month={11} navigation={this.props.navigation}/>
     </View>
     )
 
+    //return blank screen while waiting for firebase data
     if (this.state.snapshot === ''){
       return (
         <View style={styles.container} >
@@ -246,7 +224,7 @@ export default class HomeScreen extends React.Component {
         onIndexChange={index => this.setState({ index })}
         initialLayout={{ width: Dimensions.get('window').width}}
         style={styles.container2}
-        renderTabBar={this._renderTabBar}
+        renderTabBar={this.renderTabBar}
       />
     );
   }

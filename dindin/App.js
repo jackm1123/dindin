@@ -1,7 +1,8 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet} from 'react-native';
 import HomeScreen from './components/HomeScreen'
 import SplashScreen from './components/SplashScreen'
+import CreateEvent from './components/CreateEvent'
 import InvitationDetailsScreen from './components/InvitationDetailsScreen'
 import {createAppContainer,createStackNavigator} from 'react-navigation'
 import * as firebase from 'firebase';
@@ -14,7 +15,6 @@ var config = {
 if (!firebase.apps.length) {
     firebase.initializeApp(config);
 }
-
 
 const rootStack = createStackNavigator({
   Home: {
@@ -34,7 +34,13 @@ const rootStack = createStackNavigator({
     navigationOptions:{
       headerMode: 'float'
     }
-  }
+  },
+  CreateEvent: {
+    screen: CreateEvent,
+    navigationOptions:{
+      headerMode: 'float'
+    }
+  },
 },{
   initialRouteName: 'Splash',
 })
@@ -48,7 +54,6 @@ export default class App extends React.Component {
   }
 
   render() {
-
     return (
       <AppContainer persistenceKey={"NavigationState"}/>
     );

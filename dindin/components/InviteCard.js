@@ -1,5 +1,5 @@
 import * as React from 'react'
-import {View, Text, StyleSheet, Image, TouchableOpacity, Button} from 'react-native'
+import {View, Text, StyleSheet, Image, TouchableOpacity} from 'react-native'
 import * as firebase from 'firebase';
 
 //Initialize Firebase
@@ -10,7 +10,6 @@ var config = {
 if (!firebase.apps.length) {
     firebase.initializeApp(config);
 }
-
 
 const monthNames = ["january", "february", "march", "april", "may", "june",
   "july", "august", "september", "october", "november", "december"
@@ -102,11 +101,9 @@ export default class InviteCard extends React.Component{
                         </TouchableOpacity>
                     </View>
                 </View>
-            </TouchableOpacity>
-            
+            </TouchableOpacity> 
         )
     }
-
 }
 
 const styles = StyleSheet.create(

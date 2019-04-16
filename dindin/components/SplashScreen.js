@@ -4,7 +4,7 @@ https://www.lynda.com/React-Native-tutorials/Creating-animation-loop/560343/6724
 https://facebook.github.io/react-native/docs/animations
 */
 import React from 'react'
-import {Animated, View, StyleSheet, ImageBackground, Image, TouchableHighlight, Text, Dimensions, Button, Alert} from 'react-native'
+import {Animated, View, StyleSheet, ImageBackground, Image, TouchableHighlight, Text, Dimensions, Alert} from 'react-native'
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import { Localization } from 'expo-localization';
 import { StackNavigator } from 'react-navigation';
@@ -58,10 +58,9 @@ export default class SplashScreen extends React.Component{
   async handleFacebookLogin(navigation) {
     try {
       const { type, token } = await Facebook.logInWithReadPermissionsAsync(
-        '453424531864016', // Replace with your own app id in standalone app
+        '453424531864016',
         { permissions: ['public_profile'] }
       );
-      //console.log(type + " "+ token)
 
       switch (type) {
         case 'success': {
@@ -70,8 +69,6 @@ export default class SplashScreen extends React.Component{
             `https://graph.facebook.com/me?access_token=${token}`
           );
           const profile = await response.json();
-          //console.log("Was Successful")
-          //console.log(profile)
           navigation.navigate('Home', {profile});
 
           /*Passes profile JSON object like this:
@@ -97,28 +94,6 @@ export default class SplashScreen extends React.Component{
     }
   }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   render(){
 
     /* Internationalization */
@@ -127,41 +102,36 @@ export default class SplashScreen extends React.Component{
       localString = "توصيل عشاق الطعام"
     }
 
+    return(
+      <View style={styles.backgroundContainer}>
+        <Image style={styles.circles} source={require('../assets/ovals2.png')}>
+        </Image>
+        <Image style={styles.home} source={require('../assets/house2.png')}>
+        </Image>
 
-      return(
-        <View style={styles.backgroundContainer}>
-          <Image style={styles.circles} source={require('../assets/ovals2.png')}>
+        <FadeInView style={styles.pinkface}>
+          <Image source={require('../assets/pinkface2.png')}>
           </Image>
-          <Image style={styles.home} source={require('../assets/house2.png')}>
+        </FadeInView>
+        <FadeInView style={styles.purpleface}>
+          <Image source={require('../assets/purpleface.png')}>
           </Image>
-
-          <FadeInView style={styles.pinkface}>
-            <Image source={require('../assets/pinkface2.png')}>
-            </Image>
-          </FadeInView>
-          <FadeInView style={styles.purpleface}>
-            <Image source={require('../assets/purpleface.png')}>
-            </Image>
-          </FadeInView>
-          <FadeInView style={styles.greenface}>
-            <Image source={require('../assets/greenface.png')}>
-            </Image>
-          </FadeInView>
-
-
-          <Text style={styles.title}>DinDin</Text>
-          <Text style={styles.description}>{localString}</Text>
-
-          <TouchableHighlight underlayColor = {'#0A46FF'} onPress={() => this.handleFacebookLogin(this.props.navigation)}>
-            <View>
-              <ImageBackground style={styles.buttonImage} source={require('../assets/Button.png')}>
-                <Text style={styles.buttonText}> Get Started</Text>
-              </ImageBackground>
-            </View>
-          </TouchableHighlight>
-
-        </View>
-      )
+        </FadeInView>
+        <FadeInView style={styles.greenface}>
+          <Image source={require('../assets/greenface.png')}>
+          </Image>
+        </FadeInView>
+        <Text style={styles.title}>DinDin</Text>
+        <Text style={styles.description}>{localString}</Text>
+        <TouchableHighlight underlayColor = {'#0A46FF'} onPress={() => this.handleFacebookLogin(this.props.navigation)}>
+          <View>
+            <ImageBackground style={styles.buttonImage} source={require('../assets/Button.png')}>
+              <Text style={styles.buttonText}> Get Started</Text>
+            </ImageBackground>
+          </View>
+        </TouchableHighlight>
+      </View>
+    )
   }
 }
 
@@ -243,6 +213,3 @@ const styles = StyleSheet.create(
         },
     }
 )
-
-
-
