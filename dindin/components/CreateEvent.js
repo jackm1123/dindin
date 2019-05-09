@@ -37,7 +37,7 @@ export default class CreateEvent extends React.Component {
 
 	constructor(props){
 		super(props);
-        Geocode.setApiKey("AIzaSyC01WGGqQ_6fkdF_nJNUj4q9G6WF7BUXTs");
+        Geocode.setApiKey("XXXXXXXXXXXXXXXXXXXXXXXXXXXX");
         this.state={
             isDateTimePickerVisible: false,
             time: '9:00 PM',
