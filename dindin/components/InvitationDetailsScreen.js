@@ -36,7 +36,7 @@ export default class InvitationDetailsScreen extends React.Component {
 
 	constructor(props){
 		super(props);
-		Geocode.setApiKey("AIzaSyC01WGGqQ_6fkdF_nJNUj4q9G6WF7BUXTs");
+		Geocode.setApiKey("XXXXXXXXXXXXXXXXXXXXXXXXXXX"); //removed API key
 
 		this.state = {
 			host: props.navigation.state.params.host,
